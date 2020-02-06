@@ -1,0 +1,31 @@
+.hide{
+    display: none;
+}
+
+ul.main a{
+    text-decoration: none;
+}
+
+ul.main a.selected{
+    color: #f00;
+}
+
+ul.main ul{
+    display: none;
+}
+
+ul.main ul.open{
+    display: block;
+}
+
+ul + a::after{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: '\f107';
+    margin-left: 4px;
+}
+
+ul.main li{
+    display: flex;
+    flex-direction: column-reverse;
+}

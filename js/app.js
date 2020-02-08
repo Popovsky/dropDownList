@@ -2,6 +2,7 @@ console.log('App was loaded...');
 
 const a = document.querySelectorAll('ul.list-unstyled.main a');
 const ul = document.querySelectorAll('ul.list-unstyled.main ul');
+let temp, flag = false;
 
 [].map.call(a, (el) => el.addEventListener('click', (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ const ul = document.querySelectorAll('ul.list-unstyled.main ul');
             :
             null);
 
-    e.target.previousElementSibling ? e.target.previousElementSibling.classList.add('open') : null;
+    e.target.previousElementSibling ? temp === e.target.previousElementSibling && flag ? (e.target.previousElementSibling.classList.remove('open'), flag = false) : (e.target.previousElementSibling.classList.add('open'), flag = true) : null;
     e.target.classList.add('selected');
+    temp = e.target.previousElementSibling;
 }));

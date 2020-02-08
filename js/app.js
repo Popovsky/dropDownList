@@ -2,7 +2,7 @@ console.log('App was loaded...');
 
 const a = document.querySelectorAll('ul.list-unstyled.main a');
 const ul = document.querySelectorAll('ul.list-unstyled.main ul');
-let temp, flag = false;
+let prev, flag = false;
 
 [].map.call(a, (el) => el.addEventListener('click', (e) => {
     e.preventDefault();
@@ -16,13 +16,25 @@ let temp, flag = false;
             [...el.children].map(elem => [...elem.children].map(element => element.previousElementSibling
                 ? (
                     element.previousElementSibling.classList.remove('open'),
-                    [...element.previousElementSibling.children].map(el => [...el.children].map(elem => elem.previousElementSibling ? elem.previousElementSibling.classList.remove('open') : null))
+                        [...element.previousElementSibling.children].map(el => [...el.children].map(elem => elem.previousElementSibling
+                            ?
+                            elem.previousElementSibling.classList.remove('open')
+                            :
+                            null))
                 ) :
                 null))
             :
             null);
 
-    e.target.previousElementSibling ? temp === e.target.previousElementSibling && flag ? (e.target.previousElementSibling.classList.remove('open'), flag = false) : (e.target.previousElementSibling.classList.add('open'), flag = true) : null;
+    e.target.previousElementSibling
+        ?
+        prev === e.target.previousElementSibling && flag
+            ?
+            (e.target.previousElementSibling.classList.remove('open'), flag = false)
+            :
+            (e.target.previousElementSibling.classList.add('open'), flag = true)
+        :
+        null;
     e.target.classList.add('selected');
-    temp = e.target.previousElementSibling;
+    prev = e.target.previousElementSibling;
 }));
